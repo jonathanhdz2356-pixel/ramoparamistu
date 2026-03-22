@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mitsu 💜</title>
+
+    <style>
+        :root {
+            --purple-main: #6a0dad;
+            --purple-light: #8a2be2;
+            --gold: #ffd700;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(#fdf6ff, #fff0f6);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Brush Script MT', cursive;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Título con animación suave */
+        h1 {
+            color: var(--purple-main);
+            opacity: 0;
+            animation: aparecerTexto 2s ease forwards;
+            animation-delay: 0.5s;
+            margin: 20px;
+            z-index: 10;
+        }
+
+        @media (min-width: 769px) { h1 { font-size: 3rem; } }
+        @media (max-width: 768px) { h1 { font-size: 1.8rem; width: 80%; } }
+
+        /* Contenedor del Ramo */
+        .ramo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        svg {
+            width: 80vw;
+            max-width: 300px;
+            filter: drop-shadow(0 5px 15px rgba(106, 13, 173, 0.2));
+        }
+
+        /* Animación de dibujado de tallos y pétalos */
+        .tallo {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: draw 2s ease forwards;
+        }
+
+        .petalo {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: aparecerFlor 1s ease forwards;
+        }
+
+        /* Delays escalonados para efecto natural */
+        .f1 { animation-delay: 1.0s; }
+        .f2 { animation-delay: 1.4s; }
+        .f3 { animation-delay: 1.8s; }
+        .f4 { animation-delay: 2.2s; }
+        .f5 { animation-delay: 2.6s; }
+
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        @keyframes aparecerFlor { 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes aparecerTexto { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Botón Estilizado */
+        button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: var(--purple-main);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+            z-index: 10;
+        }
+
+        button:hover {
+            background: var(--purple-light);
+            transform: scale(1.05);
+        }
+
+        button:active { transform: scale(0.95); }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mitsu, te amo como no tienes idea, gracias por tanto 💜</h1>
+
+    <div class="ramo-container">
+        <svg viewBox="0 0 200 250">
+            <path class="tallo f1" d="M40 200 L40 120" stroke="green" stroke-width="3" fill="none"/>
+            <path class="petalo f1" d="M30 120 Q40 90 50 120 Z" fill="purple"/>
+            
+            <path class="tallo f2" d="M70 200 L70 110" stroke="green" stroke-width="3" fill="none"/>
+            <path class="petalo f2" d="M60 110 Q70 80 80 110 Z" fill="#ffd700"/>
+            
+            <path class="tallo f3" d="M100 200 L100 100" stroke="green" stroke-width="3" fill="none"/>
+            <path class="petalo f3" d="M90 100 Q100 70 110 100 Z" fill="purple"/>
+            
+            <path class="tallo f4" d="M130 200 L130 110" stroke="green" stroke-width="3" fill="none"/>
+            <path class="petalo f4" d="M120 110 Q130 80 140 110 Z" fill="#ffd700"/>
+            
+            <path class="tallo f5" d="M160 200 L160 120" stroke="green" stroke-width="3" fill="none"/>
+            <path class="petalo f5" d="M150 120 Q160 90 170 120 Z" fill="purple"/>
+        </svg>
+    </div>
+
+    <button id="btnMusic">💜 Reproducir canción</button>
+
+    <audio id="audio" loop>
+        <source src="https://archive.org/download/los-bunkers-a-la-velocidad-de-la-luz/Los%20Bunkers%20-%20A%20la%20velocidad%20de%20la%20luz.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById("audio");
+        const btn = document.getElementById("btnMusic");
+
+        btn.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play().catch(error => console.log("Error al reproducir:", error));
+                btn.innerHTML = "⏸ Pausar canción";
+            } else {
+                audio.pause();
+                btn.innerHTML = "💜 Reproducir canción";
+            }
+        });
+    </script>
+
+</body>
+</html>
